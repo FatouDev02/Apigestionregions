@@ -13,6 +13,7 @@ public class Pays {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_pays;
+    @Column(unique = true, length = 20)
     private String nom_pays;
 
     @OneToMany(mappedBy = "pays")

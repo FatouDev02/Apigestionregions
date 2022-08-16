@@ -19,7 +19,9 @@ public class Region implements Serializable {
     /*Cette annotation spécifie les stratégies de génération pour les valeurs
     des clés primaires : La valeur peut être AUTO, TABLE, SEQUENCE ou IDENTITY. */
     private long id;
+    @Column(unique = true, length = 20)
     private String coderegion;
+    @Column(unique = true, length = 20)
     private String nomregion;
     private String activité;
     private String Superficie;
