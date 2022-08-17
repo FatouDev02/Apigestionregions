@@ -30,13 +30,14 @@ public class RegionController {
     @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
-    public Object ajouut(@RequestBody Region region){
+    public Object ajout(@RequestBody Region region){
+        return regionService.ajout(region);
 
-        try {
+       /* try {
             return regionService.ajout(region);
         }catch (Exception e){
             return  ErrorMessage.ErreurReponse("Le code " +region.getCoderegion()+ " et " +region.getNomregion()+ " existes deja!", HttpStatus.OK,null);
-        }
+        }*/
 
 
     }

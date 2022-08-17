@@ -16,14 +16,14 @@ import java.util.Set;
 @Table(name = "population")
 public class Population {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id_population; /*doit etre recuperer dans la table Region*/
         private String Chiffre;
         private long annee;
 
     //@ManyToMany(mappedBy = "population", fetch = FetchType.LAZY)
     //private Set<Region> regionsy = new HashSet<>();
-    @ManyToMany(mappedBy = "populations")
-    List<Region> region;
+    //@ManyToMany(mappedBy = "REGIONS")
+   // List<Region> region;
 
 }

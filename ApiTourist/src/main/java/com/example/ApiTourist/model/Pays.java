@@ -11,13 +11,13 @@ import java.util.List;
 @Setter
 public class Pays {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_pays;
     @Column(unique = true, length = 20)
     private String nom_pays;
 
-    @OneToMany(mappedBy = "pays")
-    List<Region> regionList;
+   // @OneToMany(mappedBy = "pays")
+    //List<Region> regionList;
 
 
 

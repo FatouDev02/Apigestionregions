@@ -15,13 +15,13 @@ import java.util.Set;
 public class Region implements Serializable {
 
     @Id /*Cette annotation spécifie la clé primaire de l’entité :*/
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     /*Cette annotation spécifie les stratégies de génération pour les valeurs
     des clés primaires : La valeur peut être AUTO, TABLE, SEQUENCE ou IDENTITY. */
     private long id;
-    @Column(unique = true, length = 20)
+   // @Column(unique = true, length = 20)
     private String coderegion;
-    @Column(unique = true, length = 20)
+   // @Column(unique = true, length = 20)
     private String nomregion;
     private String activité;
     private String Superficie;
@@ -40,11 +40,8 @@ public class Region implements Serializable {
                             nullable = false, updatable = false)})
     //private Set<Population> populations = new HashSet<>();*/
     @ManyToMany
-    @JoinTable(
-            name = "RegionPopulation",
-            joinColumns = @JoinColumn(name="region_id"),
-            inverseJoinColumns = @JoinColumn(name = "population_id")
+    @JoinTable(name = "RegionPopulation",joinColumns = @JoinColumn(name="region_id"),inverseJoinColumns = @JoinColumn(name = "population_id")
     )
-    List<Population> populations;
+   List<Population> populations;
 
 }
