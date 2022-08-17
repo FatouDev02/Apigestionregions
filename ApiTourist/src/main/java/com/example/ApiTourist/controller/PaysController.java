@@ -1,10 +1,7 @@
 package com.example.ApiTourist.controller;
 
-import com.example.ApiTourist.model.ErrorMessage;
 import com.example.ApiTourist.model.Pays;
-import com.example.ApiTourist.model.Population;
 import com.example.ApiTourist.services.PaysService;
-import com.example.ApiTourist.services.PopulationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -26,12 +23,10 @@ public class PaysController{
     @ApiOperation(value = "Ajouter un Pays")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
-    public Object ajout(@RequestBody Pays pays){
-        try {
+    public Pays ajout(@RequestBody Pays pays){
+
             return  paysService.Ajout(pays);
-        }catch (Exception e){
-            return  ErrorMessage.ErreurReponse("Pays  existe deja!", HttpStatus.OK,null);
-        }
+
 
     }
     @ApiOperation(value = "Lister les pays")

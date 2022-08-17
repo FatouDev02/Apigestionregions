@@ -1,14 +1,12 @@
 package com.example.ApiTourist.controller;
 
 
-import com.example.ApiTourist.model.ErrorMessage;
 import com.example.ApiTourist.model.Region;
 import com.example.ApiTourist.services.RegionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,14 +28,8 @@ public class RegionController {
     @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
-    public Object ajout(@RequestBody Region region){
+    public Region ajout(@RequestBody Region region){
         return regionService.ajout(region);
-
-       /* try {
-            return regionService.ajout(region);
-        }catch (Exception e){
-            return  ErrorMessage.ErreurReponse("Le code " +region.getCoderegion()+ " et " +region.getNomregion()+ " existes deja!", HttpStatus.OK,null);
-        }*/
 
 
     }
