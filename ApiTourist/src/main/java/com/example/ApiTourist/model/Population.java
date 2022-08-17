@@ -21,8 +21,7 @@ public class Population {
         private String Chiffre;
         private long annee;
 
-    //@ManyToMany(mappedBy = "population", fetch = FetchType.LAZY)
-    //private Set<Region> regionsy = new HashSet<>();
+
     //@ManyToMany(mappedBy = "REGIONS")
    // List<Region> region;
 

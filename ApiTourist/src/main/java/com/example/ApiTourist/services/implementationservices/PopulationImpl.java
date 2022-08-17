@@ -1,6 +1,5 @@
 package com.example.ApiTourist.services.implementationservices;
 
-import com.example.ApiTourist.model.Pays;
 import com.example.ApiTourist.model.Population;
 import com.example.ApiTourist.repository.PopulationRepository;
 import com.example.ApiTourist.services.PopulationService;
@@ -25,10 +24,11 @@ public class PopulationImpl implements PopulationService {
 
 
     @Override
-    public void Modifier(Population population, Long id_population) {
+    public Population Modifier(Population population, Long id_population) {
         Population p=this.populationRepository.findById(id_population).orElseThrow();
         p.setChiffre(population.getChiffre());
         p.setAnnee(population.getAnnee());
+        return populationRepository.save(p);
     }
 
     @Override

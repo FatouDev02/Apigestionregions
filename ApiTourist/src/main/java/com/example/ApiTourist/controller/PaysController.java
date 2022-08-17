@@ -47,7 +47,7 @@ public class PaysController{
     @DeleteMapping("/delete/{id_pays}")
     public String supp(@PathVariable Long id_pays){
         this.paysService.SupprimerbyId(id_pays);
-        return"region supprimer avec Succès";
+        return"Pays supprimer avec Succès";
 
     }
 }

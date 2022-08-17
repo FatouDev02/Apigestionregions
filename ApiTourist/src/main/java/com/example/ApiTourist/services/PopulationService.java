@@ -10,7 +10,7 @@ public interface PopulationService  {
 
     List<Population> liste();
 
-    void Modifier(Population population, Long id_population);
+    Population Modifier(Population population, Long id_population);
 
     String SupprimerbyId(Long id_population);
 

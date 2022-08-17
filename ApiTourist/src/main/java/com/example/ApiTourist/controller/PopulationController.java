@@ -46,10 +46,10 @@ public class PopulationController {
         return"mise à jour valider";
     }
     @ApiOperation(value = "supprimer un element dans la table population")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id_population}")
     public String supp(@PathVariable Long id_population){
         this.populationService.SupprimerbyId(id_population);
-        return"region supprimer avec Succès";
+        return"population supprimer avec Succès";
 
     }
 }
