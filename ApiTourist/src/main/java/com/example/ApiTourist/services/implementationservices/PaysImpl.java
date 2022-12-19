@@ -1,7 +1,6 @@
 package com.example.ApiTourist.services.implementationservices;
 
 import com.example.ApiTourist.model.Pays;
-import com.example.ApiTourist.model.Population;
 import com.example.ApiTourist.repository.PaysRepository;
 import com.example.ApiTourist.services.PaysService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +14,39 @@ public class PaysImpl implements PaysService {
     @Override
     public Pays Ajout(Pays pays) {
 
-        return this.paysRepository.save(pays);
+        return paysRepository.save(pays);
     }
 
     @Override
-    public List<Pays> liste() {
+    public List<Pays> lister() {
         return this.paysRepository.findAll();
 
     }
 
     @Override
-    public Pays Modifier(Pays pays,Long id_pays) {
-        Pays pays1=this.paysRepository.findById(id_pays).orElseThrow();
-        pays1.setNom_pays(pays.getNom_pays());
+    public Pays RecupererParNom(String nom) {
+        return paysRepository.findByNom(nom);
+    }
 
-        return paysRepository.save(pays1);
+    @Override
+    public Pays Modifier(Pays pays,Long id) {
+        return paysRepository.findById(id)
+                .map(pays1 -> {
+                    pays1.setNom(pays.getNom());
+                    pays1.setCapitale(pays.getCapitale());
+                    pays1.setDescription(pays.getDescription());
+                    pays1.setDrapeau(pays.getDrapeau());
+                    pays1.setSuperficie(pays.getSuperficie());
+                    return  paysRepository.save(pays);
+                }).orElseThrow(() -> new RuntimeException("Pays non trouvéé"));
 
     }
+
+    public Pays getbyId(Long id){
+        return paysRepository.findById(id).get();
+    }
+
+
     @Override
     public String SupprimerbyId(Long id_pays) {
         this.paysRepository.deleteById(id_pays);

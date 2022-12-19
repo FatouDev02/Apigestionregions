@@ -12,11 +12,16 @@ import java.util.List;
 public class Pays {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pays;
+    private Long id;
 
-    private String nom_pays;
+    private String nom;
+    private String description;
+    private String superficie;
+    private String capitale;
+    private String drapeau;
 
-   // @OneToMany(mappedBy = "pays")
+
+    // @OneToMany(mappedBy = "pays")
     //List<Region> regionList;
 
 

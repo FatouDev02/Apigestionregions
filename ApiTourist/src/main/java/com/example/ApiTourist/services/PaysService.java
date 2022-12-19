@@ -8,7 +8,9 @@ import java.util.List;
 public interface PaysService {
 
     Pays Ajout(Pays pays);
-    List<Pays> liste();
+    List<Pays> lister();
+
+    Pays RecupererParNom(String nom);
     Pays Modifier(Pays pays,Long id_pays);
     String SupprimerbyId(Long id_Pays);
 

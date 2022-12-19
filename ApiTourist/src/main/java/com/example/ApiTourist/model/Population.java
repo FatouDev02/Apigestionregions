@@ -20,9 +20,7 @@ public class Population {
         private Long id_population; /*doit etre recuperer dans la table Region*/
         private String Chiffre;
         private long annee;
-
-
-    //@ManyToMany(mappedBy = "REGIONS")
-   // List<Region> region;
+    @ManyToMany
+    List<Region> region;
 
 }

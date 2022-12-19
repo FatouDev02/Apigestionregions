@@ -21,9 +21,12 @@ public class Region {
     private long id;
     private String coderegion;
     private String nomregion;
-    private String activité;
     private String Superficie;
     private String langue;
+    private String description;
+    private String img;
+    private String activité;
+
 
     @ManyToOne
     private Pays pays;
@@ -35,5 +38,11 @@ public class Region {
             inverseJoinColumns = @JoinColumn(name = "population_id")
     )
     List<Population> populations;
-
+    @ManyToMany
+    @JoinTable(
+            name = "Regionactivites",
+            joinColumns = @JoinColumn(name="region_id"),
+            inverseJoinColumns = @JoinColumn(name = "activite_id")
+    )
+    List<Activites> activitesList;
 }

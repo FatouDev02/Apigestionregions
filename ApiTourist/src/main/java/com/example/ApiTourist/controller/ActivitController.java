@@ -1,2 +1,4 @@
-package com.example.ApiTourist.controller;public class ActivitController {
+package com.example.ApiTourist.controller;
+public class ActivitController {
+
 }
