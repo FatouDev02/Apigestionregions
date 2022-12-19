@@ -26,7 +26,7 @@ public class RegionImpl implements RegionService {
     public Region Modifier(Region region, Long id) {
         Region r = this.regionRepository.findById(id).orElseThrow();
         r.setActivité(region.getActivité());
-        r.setNomregion(region.getNomregion());
+        r.setNom(region.getNom());
         r.setCoderegion(region.getCoderegion());
         r.setLangue(region.getLangue());
         r.setSuperficie(region.getSuperficie());
@@ -37,6 +37,11 @@ public class RegionImpl implements RegionService {
     public String SupprimerbyId(Long id) {
        this.regionRepository.deleteById(id);
        return "Region supprimée avec succes";
+    }
+
+    @Override
+    public Region findByNomm(String nom) {
+        return regionRepository.findByNom(nom);
     }
 
     @Override

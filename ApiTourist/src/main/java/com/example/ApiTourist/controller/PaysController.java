@@ -5,6 +5,7 @@ import com.example.ApiTourist.config.SaveImage;
 import com.example.ApiTourist.model.Pays;
 import com.example.ApiTourist.services.PaysService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -17,9 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pays")
+@RequestMapping("/ApiTourist/pays")
 @AllArgsConstructor
-
+@CrossOrigin(origins = "http://localhost:8100/", maxAge = 3600)
 @Api(value = "hello", description = "Methodes pour  Pays")
 public class PaysController{
     @Autowired
@@ -28,12 +29,10 @@ public class PaysController{
     @ApiOperation(value = "Ajouter un Pays")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
-    public ResponseEntity<Object> Createactivite(@RequestParam(value = "data") String pays,
-
-                                                 @RequestParam(value = "user") String userVenant,
+    public ResponseEntity<Object> Createpays(@RequestParam(value = "pays",required = true) String pays,
                                                  @RequestParam(value = "file", required = false) MultipartFile file) throws JsonProcessingException {
-        Pays pays1= null;
 
+Pays pays1=new JsonMapper().readValue(pays,Pays.class);
         Pays find=paysService.RecupererParNom(pays1.getNom());
         if(find==null){
             if (file != null){
@@ -46,7 +45,11 @@ public class PaysController{
             return ResponseMessage.generateResponse("error", HttpStatus.OK, "Un Pays existe déja avec le même nom !");
 
         }
+
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, " Pays enregistré !");
     }
+
+
     @ApiOperation(value = "Lister les pays")
     @GetMapping("mylist")
     public List<Pays> l(){

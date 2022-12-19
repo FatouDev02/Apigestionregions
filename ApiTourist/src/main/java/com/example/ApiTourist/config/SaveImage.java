@@ -22,8 +22,8 @@ public class SaveImage {
     public static String serveruser = localhost + "apitourist/images/pays/";
     public static String serveractivite = localhost + "apitourist/images/regions/";
 
-    public static String Activitelocation = "C:/xampp/htdocs/apitourist/images/pays";
-    public static String Userlocation = "C:/xampp/htdocs/apitourist/images/regions";
+    public static String Activitelocation = "/Applications/MAMP/htdocs/apitourist/images/pays";
+    public static String Userlocation = "/Applications/MAMP/htdocs/apitourist/images/regions";
 
     public static String save(String typeImage, MultipartFile file, String nomFichier) {
         String src = "";

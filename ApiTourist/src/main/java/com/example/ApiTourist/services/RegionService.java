@@ -10,6 +10,7 @@ public interface RegionService {
     List<Object[]> lister();
     Region Modifier(Region region , Long id);
     String SupprimerbyId(Long id);
+    Region findByNomm(String nom);
 
     Iterable<Object[]> listersanspays();
 }

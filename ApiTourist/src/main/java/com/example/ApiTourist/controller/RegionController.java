@@ -1,13 +1,20 @@
 package com.example.ApiTourist.controller;
 
 
+import com.example.ApiTourist.config.ResponseMessage;
+import com.example.ApiTourist.config.SaveImage;
+import com.example.ApiTourist.model.Pays;
 import com.example.ApiTourist.model.Region;
 import com.example.ApiTourist.services.RegionService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,8 +36,23 @@ public class RegionController {
     @ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
-    public Region ajout(@RequestBody Region region){
-        return regionService.ajout(region);
+    public ResponseEntity<Object> Createregion(@RequestParam(value = "data") String region,
+                                                 @RequestParam(value = "file", required = false) MultipartFile file) throws JsonProcessingException {
+       Region region1=null;
+        Region find=regionService.findByNomm(region1.getNom());
+        if(find==null){
+            if (file != null){
+                region1.setImg(SaveImage.save("region",file, region1.getNom()));
+            }
+            else {
+                return ResponseMessage.generateResponse("error", HttpStatus.OK, "Fichier vide");
+            }
+        }else{
+            return ResponseMessage.generateResponse("error", HttpStatus.OK, "Une region existe déja avec le même nom !");
+
+        }
+
+        return ResponseMessage.generateResponse("error", HttpStatus.OK, " Région enregistrée !");
 
 
     }

@@ -20,7 +20,7 @@ public class Region {
     des clés primaires : La valeur peut être AUTO, TABLE, SEQUENCE ou IDENTITY. */
     private long id;
     private String coderegion;
-    private String nomregion;
+    private String nom;
     private String Superficie;
     private String langue;
     private String description;
