@@ -15,8 +15,8 @@ public class Pays {
     private Long id;
 
     private String nom;
-    private String description;
     private String superficie;
+    private String description;
     private String capitale;
     private String drapeau;
 

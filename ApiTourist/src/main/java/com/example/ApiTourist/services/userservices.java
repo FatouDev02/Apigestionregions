@@ -9,7 +9,7 @@ import java.util.List;
 public interface userservices {
     User ajout(User user);
     Role ajoutrole(Role role);
-    void addroletouser(String username,String roleName);
+   // void addroletouser(String username,String roleName);
     User getuser(String username);
     List<User> lister();
 }

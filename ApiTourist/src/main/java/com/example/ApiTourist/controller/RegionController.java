@@ -7,8 +7,7 @@ import com.example.ApiTourist.model.Pays;
 import com.example.ApiTourist.model.Region;
 import com.example.ApiTourist.services.RegionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,13 +26,14 @@ il permet de gérer toutes les API REST telles que les requêtes GET, POST, Dele
 /*Elle est utilisée pour traiter les requêtes HTTP avec des modèles d’URL spécifiés.
 Il est utilisé dans et avec les @Controller et les @RestController.*/
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100/", maxAge = 3600,allowCredentials="true")
 
-@Api(value = "hello", description = "Methodes sur Region")
+//@Api(value = "hello", description = "Methodes sur Region")
 public class RegionController {
 
     @Autowired
     RegionService regionService;
-    @ApiOperation(value = "Ajouter une region ")
+    //@ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
     public ResponseEntity<Object> Createregion(@RequestParam(value = "data") String region,
@@ -58,26 +58,26 @@ public class RegionController {
     }
 
 
-    @ApiOperation(value = "afficher la liste des regions ")
+  //  @ApiOperation(value = "afficher la liste des regions ")
     @GetMapping("/mylist")
     public List<Object[]> l(){
 
         return regionService.lister();
     }
-    @ApiOperation(value = "afficher la liste des regions ")
+  //  @ApiOperation(value = "afficher la liste des regions ")
     @GetMapping("/mylistwithoutp")
     public Iterable<Object[]> regionIterable(){
         return  regionService.listersanspays();
     }
 
-    @ApiOperation(value = "Modifier une region par Id")
+   // @ApiOperation(value = "Modifier une region par Id")
     @PutMapping("/update/{id}")
     /*on envoie la variable ID*/
     public String  update(@RequestBody Region region,@PathVariable Long id){
         this.regionService.Modifier(region,id);
                 return"mise à jour valider";
     }
-    @ApiOperation(value = "Supprimer une region par Id")
+   // @ApiOperation(value = "Supprimer une region par Id")
     @DeleteMapping("/delete/{id}")
     public String supp(@PathVariable Long id){
         this.regionService.SupprimerbyId(id);

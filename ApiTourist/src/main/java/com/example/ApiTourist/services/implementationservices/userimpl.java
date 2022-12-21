@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class userimpl implements userservices,UserDetailsService {
+public class userimpl implements userservices {
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -47,14 +47,14 @@ public class userimpl implements userservices,UserDetailsService {
         log.info("Ajout d'un role  {} dans la Bdd",role.getName());
         return roleRepository.save(role);    }
 
-    @Override
-    public void addroletouser(String username, String roleName) {
-        log.info("Attribution d'un role {} à un collaborateur {}",roleName,username);
-        User user=userRepository.findByUsername(username);
-        Role role=roleRepository.findByName(roleName);
-        //will executing because we have transactionnal
-        user.getRoles().add(role);
-    }
+//    @Override
+//    public void addroletouser(String username, String roleName) {
+//        log.info("Attribution d'un role {} à un collaborateur {}",roleName,username);
+//        User user=userRepository.findByUsername(username);
+//        Role role=roleRepository.findByName(roleName);
+//        //will executing because we have transactionnal
+//        user.getRoles().add(role);
+//    }
 
     @Override
     public User getuser(String username) {
@@ -66,30 +66,5 @@ public class userimpl implements userservices,UserDetailsService {
         return null;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (username.trim().isEmpty()) {
-            throw new UsernameNotFoundException("username vide");
-        }
-        //recupere le collaborateurs par son username
-        User users=userRepository.findByUsername(username);
-        if(users == null){
-            //si le coll n'existe pas retouner cette erreur
-            log.error("Collaborateur non trouvé");
 
-            throw new UsernameNotFoundException("Collaborateur non trouvé");
-        } else{
-            //sinon sil existe retouner ce messsage
-            log.info("Collaborateur  trouvé",username);
-
-        }
-
-        //noonnnnnnnnnnnn compris
-        Collection<SimpleGrantedAuthority> authorities= new ArrayList<>();
-        users.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
-        return new  org.springframework.security.core.userdetails.User(users.getUsername(),users.getPassword(),authorities);
-        ////////////////////////
-        // L'interface UserDetails  représente un objet
-        // utilisateur authentifié et Spring Security fournit une implémentation prête à l'emploi de org.......
-    }
 }

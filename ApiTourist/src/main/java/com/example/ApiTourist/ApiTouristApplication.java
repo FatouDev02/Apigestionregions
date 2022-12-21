@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
@@ -20,12 +19,7 @@ public class ApiTouristApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiTouristApplication.class, args);
 	}
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-
-	}
-
+/*
 	@Bean
 	CommandLineRunner run(userservices userservices){
 		return args -> {
@@ -38,10 +32,10 @@ public class ApiTouristApplication {
 			userservices.ajout(new User(null,"coulmmm","lyd@gmail.com","lydusername","lydpassword",new ArrayList<>()));
 
 			//attribuer un role a un user
-			userservices.addroletouser("fcusername","ADMIN");
-			userservices.addroletouser("fcusername","USER");
+//			userservices.addroletouser("fcusername","ADMIN");
+//			userservices.addroletouser("fcusername","USER");
 
 		};
 
-	}
+	}*/
 }
