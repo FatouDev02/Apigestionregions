@@ -24,16 +24,16 @@ public class PaysImpl implements PaysService {
     }
 
     @Override
-    public Pays RecupererParNom(String nom) {
-        return paysRepository.findByNom(nom);
+    public Pays RecupererParNom(String nompays) {
+        return paysRepository.findByNompays(nompays);
     }
 
     @Override
     public Pays Modifier(Pays pays,Long id) {
         return paysRepository.findById(id)
                 .map(pays1 -> {
-                    pays1.setNom(pays.getNom());
-                    pays1.setCapitale(pays.getCapitale());
+                        pays1.setNompays(pays.getNompays());
+                        pays1.setCapitale(pays.getCapitale());
                     pays1.setDescription(pays.getDescription());
                     pays1.setDrapeau(pays.getDrapeau());
                     pays1.setSuperficie(pays.getSuperficie());

@@ -1,9 +1,14 @@
 package com.example.ApiTourist.services.implementationservices;
 
+import com.example.ApiTourist.config.ResponseMessage;
+import com.example.ApiTourist.model.Pays;
 import com.example.ApiTourist.model.Region;
+import com.example.ApiTourist.repository.PaysRepository;
 import com.example.ApiTourist.repository.RegionRepository;
 import com.example.ApiTourist.services.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +17,21 @@ import java.util.List;
 public class RegionImpl implements RegionService {
     @Autowired
     RegionRepository regionRepository;
+    @Autowired
+    PaysRepository paysRepository;
     @Override
-    public Region ajout(Region region) {
-        return regionRepository.save(region);
+    public Object ajout(Region region, String nompays) {
+
+        if(paysRepository.findByNompays(nompays)!=null){
+            Pays find=paysRepository.findByNompays(nompays);
+            region.setPays(find);
+            // population.setAnnee(new Date());
+            return regionRepository.save(region);
+
+        }else{
+            return ResponseMessage.generateResponse("error", HttpStatus.OK, " Cette rregion n'existe pas !");
+        }
+
     }
 
     @Override
@@ -25,7 +42,6 @@ public class RegionImpl implements RegionService {
     @Override
     public Region Modifier(Region region, Long id) {
         Region r = this.regionRepository.findById(id).orElseThrow();
-        r.setActivité(region.getActivité());
         r.setNom(region.getNom());
         r.setCoderegion(region.getCoderegion());
         r.setLangue(region.getLangue());

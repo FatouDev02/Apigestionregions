@@ -75,7 +75,7 @@ public class WebSecurityConfig {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/ApiTourist/user/signin").permitAll()
-                .antMatchers("/ApiTourist/user/signup","/ApiTourist/pays/**").permitAll()
+                .antMatchers("/ApiTourist/user/signup","/ApiTourist/pays/**","/ApiTourist/activite/**","/ApiTourist/region/**","/ApiTourist/population/**").permitAll()
                 .anyRequest().authenticated();
 
 

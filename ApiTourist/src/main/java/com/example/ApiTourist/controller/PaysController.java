@@ -32,13 +32,12 @@ public class PaysController{
                                                  @RequestParam(value = "file", required = false) MultipartFile file) throws JsonProcessingException {
 
        Pays pays1=new JsonMapper().readValue(pays,Pays.class);
-        Pays find=paysService.RecupererParNom(pays1.getNom());
+        Pays find=paysService.RecupererParNom(pays1.getNompays());
         if(find==null){
             if (file != null){
-                pays1.setDrapeau(SaveImage.save("pays",file, pays1.getNom()));
+                pays1.setDrapeau(SaveImage.save("pays",file, pays1.getNompays()));
                 paysService.Ajout(pays1);
                 return ResponseMessage.generateResponse("ok", HttpStatus.OK, " Pays enregistré !");
-
             }
             else {
                 return ResponseMessage.generateResponse("error", HttpStatus.OK, "Fichier vide");

@@ -9,6 +9,7 @@ public interface PopulationService  {
     Population ajout(Population population);
 
     List<Population> liste();
+    Population findbyannnee(Long annee);
 
     Population Modifier(Population population, Long id_population);
 

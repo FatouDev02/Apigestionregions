@@ -5,7 +5,7 @@ import com.example.ApiTourist.model.Region;
 import java.util.List;
 
 public interface RegionService {
-    Region ajout(Region region);
+    Object ajout(Region region,String nompays);
 
     List<Object[]> lister();
     Region Modifier(Region region , Long id);

@@ -19,8 +19,8 @@ public class Population {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id_population; /*doit etre recuperer dans la table Region*/
         private String Chiffre;
-        private long annee;
-    @ManyToMany
-    List<Region> region;
+        private Long annee;
+    @ManyToOne
+    private Region region;
 
 }

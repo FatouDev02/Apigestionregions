@@ -13,6 +13,7 @@ public class PopulationImpl implements PopulationService {
     PopulationRepository populationRepository;
     @Override
     public Population ajout(Population population) {
+
         return populationRepository.save(population);
     }
 
@@ -20,6 +21,11 @@ public class PopulationImpl implements PopulationService {
     public List<Population> liste() {
 
         return populationRepository.findAll();
+    }
+
+    @Override
+    public Population findbyannnee(Long annee) {
+        return populationRepository.findByAnnee(annee);
     }
 
 

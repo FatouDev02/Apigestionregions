@@ -1,13 +1,12 @@
 package com.example.ApiTourist.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity/*Cette annotation spécifie que la classe est une entité : et sera enregistré dans la BDD */
 @Getter/*de lombok */
@@ -23,26 +22,22 @@ public class Region {
     private String nom;
     private String Superficie;
     private String langue;
+    private String domaineactivite;
+
     private String description;
     private String img;
-    private String activité;
 
 
     @ManyToOne
     private Pays pays;
 
-    @ManyToMany
-    @JoinTable(
-            name = "RegionPopulation",
-            joinColumns = @JoinColumn(name="region_id"),
-            inverseJoinColumns = @JoinColumn(name = "population_id")
-    )
-    List<Population> populations;
-    @ManyToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "region")
+    List<Population> populations=new ArrayList<>();
+   /* @ManyToMany
     @JoinTable(
             name = "Regionactivites",
             joinColumns = @JoinColumn(name="region_id"),
-            inverseJoinColumns = @JoinColumn(name = "activite_id")
-    )
-    List<Activites> activitesList;
+            inverseJoinColumns = @JoinColumn(name = "activite_id"))
+    List<Activites> activitesList;*/
 }
