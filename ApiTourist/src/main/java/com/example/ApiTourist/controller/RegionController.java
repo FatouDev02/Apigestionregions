@@ -6,7 +6,9 @@ import com.example.ApiTourist.config.SaveImage;
 import com.example.ApiTourist.model.Pays;
 import com.example.ApiTourist.model.Population;
 import com.example.ApiTourist.model.Region;
+import com.example.ApiTourist.repository.PaysRepository;
 import com.example.ApiTourist.repository.PopulationRepository;
+import com.example.ApiTourist.repository.RegionRepository;
 import com.example.ApiTourist.services.PopulationService;
 import com.example.ApiTourist.services.RegionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -34,12 +37,15 @@ il permet de gérer toutes les API REST telles que les requêtes GET, POST, Dele
 Il est utilisé dans et avec les @Controller et les @RestController.*/
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:8100/", maxAge = 3600,allowCredentials="true")
-//@Api(value = "hello", description = "Methodes sur Region")
 public class RegionController {
 @Autowired
     PopulationService populationService;
     @Autowired
     RegionService regionService;
+    @Autowired
+    PaysRepository paysRepository;
+    @Autowired
+    RegionRepository regionRepository;
     //@ApiOperation(value = "Ajouter une region ")
     @PostMapping("/add")
     /*pour que spring envoie les données de l'objet region envoyé au niveau du body we use RequestBody*/
@@ -66,9 +72,6 @@ public class RegionController {
 
     }
 
-
-
-
     @PostMapping("/add/{nompays}")
     public Object createregiontrue(/*@Param("coderegion") String coderegion,
                                    @Param("nom") String nom,
@@ -89,7 +92,6 @@ public class RegionController {
         //region1.setNom(region1.getNom());
         //habitant1.setRegion(region1);
         Population p= populationService.ajout(habitant1);
-
         region1.getPopulations().add(p);
         if (file != null){
             region1.setImg(SaveImage.save("region",file, region1.getNom()));
@@ -102,9 +104,27 @@ public class RegionController {
 
     }
 
+    @GetMapping("/listregionbypays/{id}")
+    public List<Region> listeparrpays(@PathVariable  Long id){
+        Pays pfind=paysRepository.findById(id).get();
+        List<Region> newregion = new ArrayList<>();
+        List<Region> allregion=regionRepository.findAll();
+        for (Region r: allregion ){
+            try{
+                if(r.getPays().getId().equals(pfind.getId())){
+                    newregion.add(r);
+                }
+            }catch (Exception e){
 
+            }
+        }
+        return newregion;
+    }
 
-
+    @GetMapping("/get/{id}")
+    public Region get(Long id){
+        return regionRepository.findById(id).get();
+    }
 
 
   //  @ApiOperation(value = "afficher la liste des regions ")
@@ -113,6 +133,7 @@ public class RegionController {
 
         return regionService.lister();
     }
+
   //  @ApiOperation(value = "afficher la liste des regions ")
     @GetMapping("/mylistwithoutp")
     public Iterable<Object[]> regionIterable(){

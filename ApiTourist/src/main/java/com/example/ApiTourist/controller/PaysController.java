@@ -3,6 +3,8 @@ package com.example.ApiTourist.controller;
 import com.example.ApiTourist.config.ResponseMessage;
 import com.example.ApiTourist.config.SaveImage;
 import com.example.ApiTourist.model.Pays;
+import com.example.ApiTourist.model.Region;
+import com.example.ApiTourist.repository.PaysRepository;
 import com.example.ApiTourist.services.PaysService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -24,6 +26,8 @@ import java.util.List;
 public class PaysController{
     @Autowired
     PaysService paysService;
+    @Autowired
+    PaysRepository paysRepository;
 
    // @ApiOperation(value = "Ajouter un Pays")
     @PostMapping("/add")
@@ -48,7 +52,14 @@ public class PaysController{
         }
 
     }
-
+    @GetMapping("/getnombreregionby/{id}")
+    public Long getnbre(@PathVariable Long id){
+        return paysRepository.Total(id);
+    }
+    @GetMapping("/get/{id}")
+    public Pays get(@PathVariable Long id){
+        return paysRepository.findById(id).get();
+    }
 
    // @ApiOperation(value = "Lister les pays")
     @GetMapping("mylist")
