@@ -13,23 +13,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 
+import static com.example.ApiTourist.model.ERole.ROLE_ADMIN;
+import static com.example.ApiTourist.model.ERole.ROLE_USER;
+
 @SpringBootApplication
 public class ApiTouristApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiTouristApplication.class, args);
 	}
-/*
 	@Bean
 	CommandLineRunner run(userservices userservices){
 		return args -> {
 			//crée des roles des linitialisation de lapp
-			userservices.ajoutrole(new Role(null,"USER"));
-			userservices.ajoutrole(new Role(null,"ADMIN"));
+			userservices.ajoutrole(new Role(null,ROLE_ADMIN));
+			userservices.ajoutrole(new Role(null,ROLE_USER));
 
 			//crée des roles des linitialisation de lapp
-			userservices.ajout(new User(null,"coulfatou","fc@gmail.com","fcusername","fcpassword",new ArrayList<>()));
-			userservices.ajout(new User(null,"coulmmm","lyd@gmail.com","lydusername","lydpassword",new ArrayList<>()));
+		//	userservices.ajout(new User(null,"coulfatou","fc@gmail.com","fcusername","fcpassword",new ArrayList<>()));
+		//	userservices.ajout(new User(null,"coulmmm","lyd@gmail.com","lydusername","lydpassword",new ArrayList<>()));
 
 			//attribuer un role a un user
 //			userservices.addroletouser("fcusername","ADMIN");
@@ -37,5 +39,5 @@ public class ApiTouristApplication {
 
 		};
 
-	}*/
+	}
 }
